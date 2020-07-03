@@ -1145,7 +1145,7 @@ __global__ void updateKurgXD( double delta, double g, double eps, double CFL, in
 			double dx, zi, zl, zn, zr, zlr, hl, up, hp, hr, um, hm, sl, sr;
 
 
-			//double epsc = 0.07;
+			double epsc = pow(delta,4.0);
 			// along X
 			dx = delta*0.5;
 			zi = zs[i] - hi;
@@ -1191,10 +1191,10 @@ __global__ void updateKurgXD( double delta, double g, double eps, double CFL, in
 			//am = min(am, 0.0f);
 			ad = 1.0 / (ap - am);
 			//Correct for spurious currents in really shallow depth
-			qm = hm*um;
-			qp = hp*up;
-			//qm = hm*um*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hm, 4.0))));
-			//qp = hp*up*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hp, 4.0))));
+			//qm = hm*um;
+			//qp = hp*up;
+			qm = hm*um*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hm, 4.0))));
+			qp = hp*up*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hp, 4.0))));
 
 			a = max(ap, -am);
 
@@ -2047,6 +2047,7 @@ __global__ void updateKurgYD( double delta, double g, double eps, double CFL, in
 		double hn = hh[ibot];
 		double dx, zi, zl, zn, zr, zlr, hl, up, hp, hr, um, hm;
 
+		double epsc = pow(delta, 4.0);
 
 
 		if (hi > eps || hn > eps)
@@ -2087,10 +2088,10 @@ __global__ void updateKurgYD( double delta, double g, double eps, double CFL, in
 			//am = min(am, 0.0f);
 			ad = 1.0 / (ap - am);
 			//Correct for spurious currents in really shallow depth
-			qm = hm*um;
-			qp = hp*up;
-			//qm = hm*um*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hm, 4.0))));
-			//qp = hp*up*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hp, 4.0))));
+			//qm = hm*um;
+			//qp = hp*up;
+			qm = hm*um*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hm, 4.0))));
+			qp = hp*up*(sqrt(2.0) / sqrt(1.0 + max(1.0, pow(epsc / hp, 4.0))));
 
 			hm2 = sq(hm);
 			hp2 = sq(hp);
