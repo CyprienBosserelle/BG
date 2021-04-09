@@ -1026,7 +1026,7 @@ Forcing<T> readparamstr(std::string line, Forcing<T> forcing)
 		forcing.Atmp = readfileinfo(parametervalue, forcing.Atmp);
 	}
 
-	// atmpress forcing
+	// Rain forcing
 	parameterstr = "rainfile";
 	parametervalue = findparameter(parameterstr, line);
 	if (!parametervalue.empty())
